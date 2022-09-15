@@ -22,18 +22,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
     // сохранение файла
-    public void saveText(View view){
+    public void saveText(View view) {
         FileOutputStream fos = null;
 
         try {
-        EditText textBox = (EditText) view.findViewById(R.id.editor);
-        String text = textBox.getText().toString();
+            EditText textBox = (EditText) findViewById(R.id.editor);
+            String text = textBox.getText().toString();
 
 
-            fos = openFileOutput(FILE_NAME,MODE_PRIVATE);
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             fos.write(text.getBytes());
-            Toast.makeText(this,"Файл успешно сохранен", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Файл успешно сохранен", Toast.LENGTH_LONG).show();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         } finally {
             try {
-            if (fos != null){
+                if (fos != null) {
 
                     fos.close();
                 }
@@ -56,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
 
     // открытие файла
 
-    public void openText(View view){
+    public void openText(View view) {
         FileInputStream fin = null;
-        TextView textView = (TextView) view.findViewById(R.id.text);
+        TextView textView = (TextView) findViewById(R.id.text);
 
         try {
             fin = openFileInput(FILE_NAME);
-            byte [] bytes = new byte[fin.available()];
+            byte[] bytes = new byte[fin.available()];
             fin.read(bytes);
             String text = new String(bytes);
             textView.setText(text);
@@ -74,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }finally {
+        } finally {
             try {
-                if (fin != null){
+                if (fin != null) {
 
                     fin.close();
                 }
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
-    }
+        }
 
+    }
 }
